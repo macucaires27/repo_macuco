@@ -1,15 +1,14 @@
 body {
+    display: flex;
+    flex-direction: column;
     background-color: rgb(58, 58, 58);
 }
 
 h1 {
-    display: flex;
     color:rgb(255, 255, 255);
-    justify-content: center;
+    text-align: center;
 }
-
 img{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    margin: auto;
+    border: solid 2px white;
 }
