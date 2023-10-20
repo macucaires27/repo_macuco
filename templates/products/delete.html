@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>My App</title>
+	<link href="../../static/my_app.css" rel="stylesheet">
+</head>
+
+<body>
+   <h1>QUIERES ELIMINAR EL PRODUCTO {{ product['id'] }} ??</h1>
+    <p>Nombre:{{ product['title'] }}</p>
+    <p>Precio:{{ product['price'] }}</p>
+   <form action="/product/delete/{{ product.id }}" method = "POST">
+    <p><input type = "submit" value = "ELIMINAR" /></p>
+   </form>
+   <a href="/product">&#x3c;&#x3c; Tornar al llistat de productes</a>
+</body>
+
+</html>

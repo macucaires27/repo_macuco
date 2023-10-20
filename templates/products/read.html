@@ -23,8 +23,6 @@
 			<th>CREATED</th>
 			<th>UPDATED</th>
 		</tr>
-
-		{% for product in products %}
 			<tr>
 				<td><a href="/product/{{ product.id }}">{{ product.id }}</a></td>
 				<td><a href="/product/{{ product.id }}">{{ product.title }}</a></td>
@@ -35,14 +33,14 @@
 				<td><a href="/product/{{ product.id }}">{{ product.seller_id }}</a></td>
 				<td><a href="/product/{{ product.id }}">{{ product.created }}</a></td>
 				<td><a href="/product/{{ product.id }}">{{ product.updated }}</a></td>
-				<td><a href="/product/{{ product.id }}">📝</a></td>
-				<td><a href="/product/read/{{ product.id }}">🔎</a></td>
-				<td><a href="/product/delete/{{ product.id }}">❌</a></td>
+
+					
+				</a></td>
 			</tr>
-		{% endfor %}
 	</table>
 	<br>
-	<a class="crear" href="/product/create">CREATE</a>
+    <a href="/product">&#x3c;&#x3c; Tornar al llistat de productes</a>
+
 
 </body>
 

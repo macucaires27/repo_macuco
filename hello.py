@@ -24,12 +24,11 @@ class Product(db.Model):
     title = db.Column(db.String)
     description = db.Column(db.String)
     photo = db.Column(db.String)
-    price = db.Column(db.Integer)
+    price = db.Column(db.Integer)  
     # category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
     # seller_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     created = db.Column(db.DateTime, nullable=False, server_default= db.func.now())
     updated = db.Column(db.DateTime, nullable=False, server_default= db.func.now(), onupdate= db.func.now())
-
     # category = db.relationship('Category', back_populates='products')
     # seller = db.relationship('User', back_populates='products')
 
@@ -91,10 +90,14 @@ def product(product_id):
     else: # POST
         title = request.form['title']
         description = request.form['description']
+        photo = request.form['photo']
+        price = request.form['price']
 
         # actualitzo els valors de l'item
         product.title = title
         product.description = description
+        product.photo = photo
+        product.price = price
 
         # notifico que item ha canviat i amb el commit és guarda a la BBDD
         db.session.add(product)
@@ -103,11 +106,33 @@ def product(product_id):
         # https://en.wikipedia.org/wiki/Post/Redirect/Get
         return redirect(url_for('list'))
     
+#####----------------READ-------------------####
 
-
+@app.route('/product/read/<int:product_id>')
+def read(product_id):
+    # select amb join i 1 resultat
+    product = db.session.query(Product).filter(Product.id == product_id).one()
+    
+    return render_template('/products/read.html', product = product)
 
 
 #####----------------DELETE-------------------####
+
+@app.route('/product/delete/<int:product_id>',methods = ['GET', 'POST'])
+def delete(product_id):
+    # select amb 1 resultat
+    product = db.session.query(Product).filter(Product.id == product_id).one()
+
+    if request.method == 'GET':
+        return render_template('/products/delete.html', product = product)
+    else: # POST
+        # delete!
+        db.session.delete(product)
+        db.session.commit()
+
+        return redirect(url_for('list'))
+
+
 
 
 @app.route('/hello/')
